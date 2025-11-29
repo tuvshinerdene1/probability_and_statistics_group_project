@@ -17,7 +17,7 @@ def train_all_models(df):
     
     models = {
         'Naive Bayes': GaussianNB(),
-        'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
+        'Logistic Regression': LogisticRegression(max_iter=5000, solver='saga', random_state=42),
         'Decision Tree': DecisionTreeClassifier(random_state=42),
         'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
         'SVM': SVC(random_state=42),
@@ -55,7 +55,7 @@ def train_model(df, model_name='Naive Bayes'):
     
     model_dict = {
         'Naive Bayes': GaussianNB(),
-        'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
+        'Logistic Regression': LogisticRegression(max_iter=5000, solver='saga', random_state=42),
         'Decision Tree': DecisionTreeClassifier(random_state=42),
         'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
         'SVM': SVC(random_state=42),
