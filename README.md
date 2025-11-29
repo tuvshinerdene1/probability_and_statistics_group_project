@@ -14,7 +14,7 @@
 
 1. Төслийн санг татаж авах:
 ```bash
-git clone <repository-url>
+git clone https://github.com/tuvshinerdene1/probability_and_statistics_group_project.git
 cd probability_and_statistics_group_project
 ```
 
