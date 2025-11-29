@@ -20,7 +20,7 @@ def load_and_clean_data(uploaded_file):
 
             # 3. BINNING (Target Creation)
             # CHECK THIS NAME MATCHES YOUR CSV!
-            target_col_name = 'GPA' 
+            target_col_name = 'previous_gpa' 
             
             if target_col_name in df.columns:
                 df['Target_Class'] = df[target_col_name].apply(lambda x: 1 if x >= 3.0 else 0)
