@@ -49,11 +49,11 @@ def main():
                 
                 if selected_model:
                     result = results[selected_model]
-                    plot_charts(result['confusion_matrix'], result['accuracy'], selected_model)
+                    plot_charts(result, selected_model, X_test, y_test)
                     
                     # 4. Member 5's Code - Use selected model for prediction
                     feature_names = df.drop('Target_Class', axis=1).columns
-                    predict_user_input(result['model'], feature_names)
+                    predict_user_input(result['model'], feature_names,encoders)
             
             else:
                 # Single model mode
@@ -72,13 +72,17 @@ def main():
                 # 2. Member 3's Code
                 with st.spinner(f"Training {selected_model}..."):
                     model, accuracy, cm, X_test, y_test = train_model(df, selected_model)
-                
-                # 3. Member 4's Code
-                plot_charts(cm, accuracy, selected_model)
-                
-                # 4. Member 5's Code
+
+                single_result = {
+                    'model': model,
+                    'accuracy': accuracy,
+                    'confusion_matrix': cm
+                }
+                plot_charts(single_result, selected_model, X_test, y_test)
+
                 feature_names = df.drop('Target_Class', axis=1).columns
-                predict_user_input(model, feature_names)
+                # PASS encoders HERE:
+                predict_user_input(model, feature_names, encoders)
 
 if __name__ == "__main__":
     main()
