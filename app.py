@@ -30,20 +30,19 @@ def main():
                 horizontal=True
             )
             
+# ... inside main function ...
+            
             if mode == "Compare All Models":
-                # 2. Member 3's Code - Train all models
-                with st.spinner("Training all models... This may take a moment."):
+                with st.spinner("Training all models..."):
                     results, X_test, y_test = train_all_models(df)
                 
-                # 3. Member 4's Code - Compare all models
                 compare_all_models(results)
                 
-                # Show individual confusion matrices
                 st.divider()
-                st.subheader("📊 Individual Model Confusion Matrices")
+                st.subheader("📊 Individual Model Details")
                 
                 selected_model = st.selectbox(
-                    "Select model to view details:",
+                    "Select model:",
                     [name for name, result in results.items() if 'error' not in result]
                 )
                 
@@ -51,38 +50,34 @@ def main():
                     result = results[selected_model]
                     plot_charts(result, selected_model, X_test, y_test)
                     
-                    # 4. Member 5's Code - Use selected model for prediction
-                    feature_names = df.drop('Target_Class', axis=1).columns
-                    predict_user_input(result['model'], feature_names,encoders)
+                    feature_names = df.drop('Target_GPA', axis=1).columns
+                    predict_user_input(result['model'], feature_names, encoders)
             
             else:
                 # Single model mode
                 model_options = [
-                    'Naive Bayes',
-                    'Logistic Regression',
-                    'Decision Tree',
+                    'Linear Regression',
                     'Random Forest',
-                    'SVM',
-                    'K-Nearest Neighbors',
-                    'Gradient Boosting'
+                    'Decision Tree',
+                    'Gradient Boosting',
+                    'SVR'
                 ]
                 
                 selected_model = st.selectbox("Select a model:", model_options)
                 
-                # 2. Member 3's Code
                 with st.spinner(f"Training {selected_model}..."):
-                    model, accuracy, cm, X_test, y_test = train_model(df, selected_model)
+                    # NOTE: Updated unpacking to match new return values
+                    model, r2, mae, X_test, y_test, y_pred = train_model(df, selected_model)
 
                 single_result = {
                     'model': model,
-                    'accuracy': accuracy,
-                    'confusion_matrix': cm
+                    'r2_score': r2,
+                    'mae': mae,
+                    'y_pred': y_pred
                 }
                 plot_charts(single_result, selected_model, X_test, y_test)
 
-                feature_names = df.drop('Target_Class', axis=1).columns
-                # PASS encoders HERE:
+                feature_names = df.drop('Target_GPA', axis=1).columns
                 predict_user_input(model, feature_names, encoders)
-
 if __name__ == "__main__":
     main()
