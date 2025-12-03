@@ -20,7 +20,7 @@ def plot_charts(result, model_name="Model", X_test=None, y_test=None):
     c2.metric("MAE (Mean Absolute Error)", f"{mae:.2f}")
 
     # Classification using realistic threshold for exam score
-    threshold = 70.0
+    threshold = 60.0
     y_test_bin = (y_test >= threshold).astype(int)
     y_pred_bin = (y_pred >= threshold).astype(int)
 
@@ -51,8 +51,8 @@ def plot_charts(result, model_name="Model", X_test=None, y_test=None):
         cm = confusion_matrix(y_test_bin, y_pred_bin)
         fig, ax = plt.subplots()
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                    xticklabels=['Fail <70', 'Pass ≥70'],
-                    yticklabels=['Fail <70', 'Pass ≥70'], ax=ax)
+                    xticklabels=['Fail <60', 'Pass ≥60'],
+                    yticklabels=['Fail <60', 'Pass ≥60'], ax=ax)
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
         st.pyplot(fig)
@@ -86,7 +86,7 @@ def plot_charts(result, model_name="Model", X_test=None, y_test=None):
 
 def compare_all_models(results, X_test, y_test):
     st.subheader("Model Comparison")
-    threshold = 70.0
+    threshold = 60.0
     y_test_bin = (y_test >= threshold).astype(int)
 
     data = []
@@ -116,5 +116,5 @@ def compare_all_models(results, X_test, y_test):
         with col2:
             fig, ax = plt.subplots()
             sns.barplot(x='Accuracy', y='Model', data=df, ax=ax)
-            ax.set_title("Accuracy (≥70 = Pass)")
+            ax.set_title("Accuracy (≥60 = Pass)")
             st.pyplot(fig)
