@@ -21,6 +21,11 @@ def main():
             if len(df) > 15000:
                 st.warning(f"⚠️ Dataset contains {len(df):,} rows. SVR and complex models may crash or take very long.")
                 use_subset = st.checkbox("✅ Use 10,000 random samples for faster performance (Recommended)", value=True)
+                if use_subset:
+                    df = df.sample(n=10000, random_state=42)
+                    st.info("📉 Dataset downsampled to 10,000 random rows (Fair Random Sample).")
+                else:
+                    st.error("🐢 Using full dataset. Please be patient!")
             st.write(df.head())
 
             st.divider()
