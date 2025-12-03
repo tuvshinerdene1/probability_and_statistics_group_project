@@ -18,6 +18,9 @@ def main():
         df, encoders = load_and_clean_data(uploaded_file)
         if df is not None:
             st.success("Data Loaded & Cleaned Successfully!")
+            if len(df) > 15000:
+                st.warning(f"⚠️ Dataset contains {len(df):,} rows. SVR and complex models may crash or take very long.")
+                use_subset = st.checkbox("✅ Use 10,000 random samples for faster performance (Recommended)", value=True)
             st.write(df.head())
 
             st.divider()
