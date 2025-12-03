@@ -4,17 +4,11 @@ import pandas as pd
 import numpy as np
 
 def predict_user_input(model, feature_names, encoders):
-    """
-    Хэрэглэгчээс гараар өгөгдөл авч, сургасан моделийг ашиглан таамаглал хийх функц
-    """
-    
-    # Хажуугийн цэсэнд (Sidebar) гарчиг тавих
     st.sidebar.markdown("## Student Profile – Predict Exam Score")
 
     user_input = {}
 
-    # --- ТООН ӨГӨГДЛҮҮД (slider ашиглах) ---
-    # Хязгааруудыг тодорхойлох: (min, max, default_value, step_size)
+    # --- NUMERIC FEATURES (with sliders) ---
     numeric_ranges = {
         'age': (16, 35, 22, 1),
         'study_hours_per_day': (0.0, 20.0, 5.0, 0.5),
@@ -31,13 +25,12 @@ def predict_user_input(model, feature_names, encoders):
         'exercise_frequency': (0, 7, 3, 1),
         'dropout_risk': (0, 10, 3, 1),
         'semester': (1, 8, 4, 1),
-        # Эдгээр хоёрыг мөн адил 0-10 хооронд гулсуураар сонгоно
+        # These two are now treated as numeric sliders (0–10)
         'parental_support_level': (0, 10, 7, 1),
         'social_activity': (0, 10, 6, 1),
     }
 
-    # --- КАТЕГОРИ ӨГӨГДЛҮҮД (сонгох цэс буюу selectbox) ---
-    # Хэрэглэгчид харагдах сонголтуудын жагсаалт
+    # --- CATEGORICAL FEATURES (selectbox with nice labels) ---
     categorical_mapping = {
         'gender': ['Male', 'Female', 'Other'],
         'major': ['Computer Science', 'Arts', 'Psychology', 'Business', 'Engineering', 'Medicine', 'Law', 'Other'],
@@ -52,74 +45,61 @@ def predict_user_input(model, feature_names, encoders):
         'learning_style': ['Reading', 'Visual', 'Auditory', 'Kinesthetic'],
     }
 
-    # Хажуугийн цэсэнд FORM үүсгэх
     with st.sidebar.form("student_prediction_form"):
         st.markdown("### Student Details")
 
-        # Сургалтанд ашигласан багана (feature) бүрээр давталт хийх
         for col in feature_names:
-            # Target буюу хариуг оруулах шаардлагагүй тул алгасна
             if col == 'Target_Exam_Score':
                 continue
 
-            # Баганын нэрийг уншихад эвтэйхэн болгож харуулах (Жишээ: study_hours -> Study Hours)
             pretty_name = col.replace('_', ' ').title()
 
-            # Хэрэв тусгай тоон баганууд байвал slider ашиглана
+            # Treat these two as numeric sliders (even if originally categorical)
             if col in ['parental_support_level', 'social_activity']:
                 mn, mx, default, step = numeric_ranges[col]
                 user_input[col] = st.slider(pretty_name, mn, mx, default, step, key=col)
 
-            # Бусад тоон баганууд байвал мөн slider ашиглана
+            # Other numeric columns
             elif col in numeric_ranges:
                 mn, mx, default, step = numeric_ranges[col]
                 user_input[col] = st.slider(pretty_name, float(mn), float(mx), float(default), float(step), key=col)
 
-            # Хэрэв категори (текст) өгөгдөл байвал encoder ашиглан selectbox үүсгэнэ
+            # Categorical columns
             elif col in encoders:
-                le = encoders[col] # Тухайн баганын encoder-ийг авах
-                options = le.classes_.tolist() # Боломжит утгуудыг авах
+                le = encoders[col]
+                options = le.classes_.tolist()
 
-                # Хэрэглэгчид харуулах сонголтуудыг бэлдэх
+                # Use friendly display names
                 display_options = categorical_mapping.get(col, [str(x) for x in options])
                 selected_display = st.selectbox(pretty_name, options=display_options, key=col)
 
-                # Сонгосон утгыг буцаагаад датаны үндсэн утга руу хөрвүүлэх
+                # Map back to original value for encoding
                 if col in categorical_mapping:
-                    # Mapping ашигласан бол index-ээр нь олох
                     original_value = categorical_mapping[col][display_options.index(selected_display)]
                 else:
                     original_value = selected_display
-                
-                # Сонгосон утгыг тоон код руу хөрвүүлж хадгалах (Label Encoding)
+
                 user_input[col] = le.transform([original_value])[0]
 
             else:
-                # Хэрэв өөр төрлийн багана байвал энгийн number input ашиглана
+                # Fallback (should not happen)
                 user_input[col] = st.number_input(pretty_name, value=5.0, key=col)
 
-        # "Predict Exam Score" товчийг дарах үед
         submitted = st.form_submit_button("Predict Exam Score", use_container_width=True, type="primary")
 
         if submitted:
-            # Оруулсан өгөгдлийг DataFrame болгох
             input_df = pd.DataFrame([user_input])
-            # Багануудын дарааллыг сургалтын өгөгдөлтэй ижил болгож эрэмбэлэх
             input_df = input_df.reindex(columns=feature_names, fill_value=0)
 
             try:
-                # Моделиор таамаглал хийх
                 prediction = float(model.predict(input_df)[0])
-                # Хариуг 0-100 хооронд хязгаарлах (Clip)
                 prediction = np.clip(prediction, 0, 100)
 
                 st.markdown("## Prediction Result")
-                # Таамагласан дүнг харуулах
                 st.metric(label="Predicted Exam Score", value=f"{prediction:.1f}/100", delta=None)
 
-                # Дүнгээс хамаарч өөр өөр мессеж, өнгө харуулах
                 if prediction >= 95:
-                    st.balloons() # Бөмбөлөг хөөргөх
+                    st.balloons()
                     st.success("Top-tier performance expected! Likely A+")
                 elif prediction >= 85:
                     st.success("Excellent! Strong A grade")
@@ -130,9 +110,9 @@ def predict_user_input(model, feature_names, encoders):
                 elif prediction >= 60:
                     st.warning("Passing, but needs improvement (C/D range)")
                 else:
-                    st.error("At risk of failing – urgent action needed!") # Унах эрсдэлтэй
+                    st.error("At risk of failing – urgent action needed!")
 
-                # Оруулсан өгөгдөл дээр үндэслэн хурдан дүгнэлтүүд (Insights) гаргах
+                # Quick personalized insights
                 st.markdown("### Quick Insights")
                 if user_input.get('study_hours_per_day', 0) > 7:
                     st.success("High study time – excellent habit!")
