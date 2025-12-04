@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 from data_loader import load_and_clean_data
 from model_builder import train_model, train_all_models
