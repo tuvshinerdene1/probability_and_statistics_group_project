@@ -8,7 +8,6 @@ def predict_user_input(model, feature_names, encoders):
 
     user_input = {}
 
-    # --- NUMERIC FEATURES (with sliders) ---
     numeric_ranges = {
         'age': (16, 35, 22, 1),
         'study_hours_per_day': (0.0, 20.0, 5.0, 0.5),
@@ -59,21 +58,17 @@ def predict_user_input(model, feature_names, encoders):
                 mn, mx, default, step = numeric_ranges[col]
                 user_input[col] = st.slider(pretty_name, mn, mx, default, step, key=col)
 
-            # Other numeric columns
             elif col in numeric_ranges:
                 mn, mx, default, step = numeric_ranges[col]
                 user_input[col] = st.slider(pretty_name, float(mn), float(mx), float(default), float(step), key=col)
 
-            # Categorical columns
             elif col in encoders:
                 le = encoders[col]
                 options = le.classes_.tolist()
 
-                # Use friendly display names
                 display_options = categorical_mapping.get(col, [str(x) for x in options])
                 selected_display = st.selectbox(pretty_name, options=display_options, key=col)
 
-                # Map back to original value for encoding
                 if col in categorical_mapping:
                     original_value = categorical_mapping[col][display_options.index(selected_display)]
                 else:
@@ -82,7 +77,6 @@ def predict_user_input(model, feature_names, encoders):
                 user_input[col] = le.transform([original_value])[0]
 
             else:
-                # Fallback (should not happen)
                 user_input[col] = st.number_input(pretty_name, value=5.0, key=col)
 
         submitted = st.form_submit_button("Predict Exam Score", use_container_width=True, type="primary")
@@ -112,7 +106,6 @@ def predict_user_input(model, feature_names, encoders):
                 else:
                     st.error("At risk of failing – urgent action needed!")
 
-                # Quick personalized insights
                 st.markdown("### Quick Insights")
                 if user_input.get('study_hours_per_day', 0) > 7:
                     st.success("High study time – excellent habit!")

@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 from data_loader import load_and_clean_data
 from model_builder import train_model, train_all_models
@@ -19,13 +18,13 @@ def main():
         if df is not None:
             st.success("Data Loaded & Cleaned Successfully!")
             if len(df) > 15000:
-                st.warning(f"⚠️ Dataset contains {len(df):,} rows. SVR and complex models may crash or take very long.")
-                use_subset = st.checkbox("✅ Use 10,000 random samples for faster performance (Recommended)", value=True)
+                st.warning(f"Dataset contains {len(df):,} rows. SVR and complex models may crash or take very long.")
+                use_subset = st.checkbox("Use 10,000 random samples for faster performance (Recommended)", value=True)
                 if use_subset:
                     df = df.sample(n=10000, random_state=42)
-                    st.info("📉 Dataset downsampled to 10,000 random rows (Fair Random Sample).")
+                    st.info("Dataset downsampled to 10,000 random rows (Fair Random Sample).")
                 else:
-                    st.error("🐢 Using full dataset. Please be patient!")
+                    st.error("Using full dataset. Please be patient!")
             st.write(df.head())
 
             st.divider()
@@ -37,7 +36,7 @@ def main():
             if mode == "Compare All Models":
                 with st.spinner("Training all models..."):
                     results, X_test, y_test = train_all_models(df)
-                compare_all_models(results, X_test, y_test)  # Pass X_test, y_test properly
+                compare_all_models(results, X_test, y_test)
 
                 st.divider()
                 st.subheader("Detailed Model Analysis")
