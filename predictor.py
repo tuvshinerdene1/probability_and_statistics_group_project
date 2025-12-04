@@ -102,11 +102,11 @@ def predict_user_input(model, feature_names, encoders):
                     st.balloons()
                     st.success("Top-tier performance expected! Likely A+")
                 elif prediction >= 85:
-                    st.success("Excellent! Strong A grade")
+                    st.success("Excellent!")
                 elif prediction >= 75:
-                    st.success("Very good result – solid B+")
+                    st.success("Very good result")
                 elif prediction >= 70:
-                    st.info("Good passing score – B range")
+                    st.info("Good passing score")
                 elif prediction >= 60:
                     st.warning("Passing, but needs improvement (C/D range)")
                 else:
