@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>output</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="output_files/libs/clipboard/clipboard.min.js"></script>
+<script src="output_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="output_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="output_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="output_files/libs/quarto-html/popper.min.js"></script>
+<script src="output_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="output_files/libs/quarto-html/anchor.min.js"></script>
+<link href="output_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="output_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="output_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="output_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="output_files/libs/bootstrap/bootstrap-8d4d65bdde5ef2f590189de65e1a24b8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="output.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="оюутны-сурлагын-гүйцэтгэлийг-дадал-зуршил-дээр-үндэслэн-урьдчилан-таамаглах" class="level1">
+<h1><strong>Оюутны сурлагын гүйцэтгэлийг дадал зуршил дээр үндэслэн урьдчилан таамаглах</strong></h1>
+<div id="team" style="text-align:center;">
+<p>Амирлангуй, Анударь, …</p>
+<p>2025 оны 12-р сарын 5</p>
+</div>
+<div id="introduction">
+<p>Энэхүү ажлаар оюутнуудын өдөр тутмын дадал зуршил, суралцах хэв маяг, амьдралын хэвшлийн талаарх өгөгдөлд үндэслэн оюутны сурлагын гүйцэтгэл (GPA)-д хэрхэн нөлөөлдгийг тооцох юм. Kaggle сайтын “Student habits vs academic performance” өгөгдлийн санг ашиглан оюутны мэдээллийг оруулахад гүйцэтгэлийг урьдчилан таамаглах боломжийг бүрдүүлнэ.</p>
+</div>
+<div id="table_of_content">
+<p>Агуулга</p>
+<ol type="1">
+<li><p>Оршил</p></li>
+<li><p>Шаардлагатай багцууд</p></li>
+<li><p>Өгөгдөл ба судалгааны арга</p></li>
+<li><p>Судалгааны арга зүй</p></li>
+<li><p>Туршилт ба үр дүн</p></li>
+<li><p>Дүгнэлт</p></li>
+<li><p>Ашигласан материал</p></li>
+</ol>
+</div>
+<div id="forewprd">
+<section id="оршил" class="level2">
+<h2 class="anchored" data-anchor-id="оршил"><strong>1. Оршил</strong></h2>
+<p>Орчин үеийн их дээд сургуулиудад оюутнуудын сурлагын гүйцэтгэлийг зөв үнэлэх, өгөгдөлд суурилсан аргачлалаар төлөв байдал, боломжит эрсдэлийг урьдчилан таамаглах шаардлага эрчимтэй өсөж байна. Ялангуяа оюутны суралцах дадал зуршил, анхаарал төвлөрөл, сурах хугацаа, мотиваци, нойр, стресс зэрэг амьдралын хэв маягийн хүчин зүйлс нь сурлагын амжилтад шууд нөлөө үзүүлдэг боловч эдгээрийг тооцоолох системтэй арга ихэнх сургуулиудад хангалтгүй ашиглагддаг.</p>
+<p>Сүүлийн жилүүдэд машин сургалтын ангилагч загваруудыг ашиглан боловсролын салбарт сурлагын чадамжийг урьдчилан таамаглах судалгаанууд нэмэгдсээр байна. Энэхүү загвар нь өгөгдлийн шинж чанаруудыг ашиглан GPA хэд байх эсэхийг ангилахын тулд статистик магадлалыг тооцоолдог бөгөөд хурдан, гүйцэтгэл өндөртэй байдаг.</p>
+<p>Энэхүү судалгааны ажлаар бид Kaggle сайтын “Student Habits vs Academic Performance” нэртэй өгөгдлийн санг ашиглан оюутны дадал зуршил дээр үндэслэн сурлагын амжилтын хамаарлыг судалсан юм.&nbsp;</p>
+<p>Энэхүү судалгааны үндсэн зорилго нь оюутны дадал зуршил (habits) сурлагын голч дүн (GPA)-тэй хамааралтай эсэхийг тогтооход оршино.</p>
+</section>
+</div>
+<div id="data">
+<section id="өгөгдөл-ба-шинжилгээ" class="level2">
+<h2 class="anchored" data-anchor-id="өгөгдөл-ба-шинжилгээ"><strong>2. Өгөгдөл ба шинжилгээ</strong></h2>
+<section id="ашигласан-өгөгдлийн-сан-хувьсагчид" class="level3">
+<h3 class="anchored" data-anchor-id="ашигласан-өгөгдлийн-сан-хувьсагчид"><strong>2.1 Ашигласан өгөгдлийн сан, хувьсагчид</strong></h3>
+<p>Энэхүү судалгаанд Kaggle сайт дахь Aryan Kumar-ын 2025 онд оруулсан Student Habits vs Academic Performance нэртэй өгөгдлийн санг ашигласан. Энэ dataset нь оюутны сурлагын гүйцэтгэлд нөлөөлж болох амьдралын хэвшил, суралцах зан төлөв, сэтгэлзүйн байдал зэрэг хүчин зүйлсийг багтаасан.</p>
+<ol type="1">
+<li><p><strong>Суралцах дадал ба академик хүчин зүйлс</strong></p>
+<ol type="1">
+<li><p>study_hours_per_day</p></li>
+<li><p>attendance_percentage</p></li>
+<li><p>previous_gpa</p></li>
+<li><p>exam_score</p></li>
+<li><p>exam_anxiety_score</p></li>
+<li><p>time_management_score</p></li>
+<li><p>learning_style</p></li>
+<li><p>dropout_risk</p></li>
+<li><p>semester</p></li>
+<li><p>access_to_tutoring</p></li>
+</ol></li>
+<li><p><strong>Сэтгэлзүй, зан төлөв ба амьдралын хэв маяг</strong></p>
+<ol type="1">
+<li><p>motivation_level</p></li>
+<li><p>stress_level</p></li>
+<li><p>social_activity</p></li>
+<li><p>mental_health_rating</p></li>
+<li><p>extracurricular_participation</p></li>
+<li><p>diet_quality</p></li>
+<li><p>exercise_frequency</p></li>
+<li><p>sleep_hours</p></li>
+<li><p>screen_time</p></li>
+<li><p>netflix_hours</p></li>
+<li><p>social_media_hours</p></li>
+</ol></li>
+<li><p><strong>Гэр бүл, санхүү ба орчин</strong></p>
+<ol type="1">
+<li><p>family_income_range</p></li>
+<li><p>part_time_job</p></li>
+<li><p>parental_support_level</p></li>
+<li><p>parental_education_level</p></li>
+<li><p>internet_quality</p></li>
+<li><p>study_environment</p></li>
+<li><p>gender</p></li>
+<li><p>age</p></li>
+<li><p>major</p></li>
+<li><p>Student_id</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="өгөгдлийг-унших-товч-шалгах" class="level3">
+<h3 class="anchored" data-anchor-id="өгөгдлийг-унших-товч-шалгах"><strong>2.2 Өгөгдлийг унших, товч шалгах</strong></h3>
+<p><strong>Өгөгдлийг боловсруулах үе шат:</strong> Судалгаанд ашиглах өгөгдлийн чанарыг сайжруулах зорилгоор дараах цэвэрлэгээг хийсэн. Үүнд:</p>
+<ol type="1">
+<li><p>Тооцоололд ач холбогдолгүй Student_id болон зорилтот хувьсагчтай хэт өндөр хамааралтай previous_gpa багануудыг хассан.</p></li>
+<li><p>Регрессийн шинжилгээнд алдаа үүсгэхгүйн тулд дутуу утгатай (NaN) мөрүүдийг түүврээс хассан.</p></li>
+<li><p>Категори хэлбэрийн өгөгдлийг (текстэн утгууд) Label Encoding аргаар тоон хэлбэрт шилжүүлсэн.</p></li>
+</ol>
+<p>uploaded_file нь CSV форматтай гэж үзэж, pandas DataFrame-д уншина.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(uploaded_file)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="цэвэрлэгээ-ба-шинж-чанар-боловсруулах" class="level3">
+<h3 class="anchored" data-anchor-id="цэвэрлэгээ-ба-шинж-чанар-боловсруулах"><strong>2.3 Цэвэрлэгээ ба шинж чанар боловсруулах</strong></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>columns_to_drop <span class="op">=</span> [<span class="st">'student_id'</span>, <span class="st">'previous_gpa'</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[col <span class="cf">for</span> col <span class="kw">in</span> columns_to_drop <span class="cf">if</span> col <span class="kw">in</span> df.columns], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Student_id буюу оюутны дугаар нь тооцоололд шаардлагагүй, previous_gpa буюу өмнөх голч дүнг оруулснаар тооцоололд хэт хамааралтай болох учраас шаардлагагүй гэж үзэн тухайн 2 баганыг хассан.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Өгөгдлийн бүрэн бүтэн байдлыг хангах үүднээс дутуу утгатай (missing values) мөрүүдийг түүврээс хассан.<br>
+Энэ нь regression загвар болон correlation матрицад алдаа гарахаас сэргийлдэг.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>            encoders <span class="op">=</span> {}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            categorical_cols <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'bool'</span>]).columns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> col <span class="kw">in</span> categorical_cols:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                le <span class="op">=</span> LabelEncoder()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                df[col] <span class="op">=</span> le.fit_transform(df[col].astype(<span class="bu">str</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                encoders[col] <span class="op">=</span> le</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Текст төрөл буюу ‘object’, boolean буюу ‘bool’ төрлийн өгөгдөлтэй багануудыг сонгож ‘categorical_cols’-д авна.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LabelEncoder нь Male/Female гэх мэт текст утгыг 0,1 гэсэн тоонд хөрвүүлнэ. encoders[col] = le → орчуулсан mapping-г хадгалж, дараа prediction хийхдээ эсвэл inverse_transform хийхэд ашиглаж болно.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'exam_score'</span> <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                st.error(<span class="st">"Column 'exam_score' not found in the dataset!"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">None</span>, <span class="va">None</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">'exam_score'</span>: <span class="st">'Target_Exam_Score'</span>})</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> df, encoders</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Төслийн үндсэн зорилтот багана болох exam_score өгөгдөлд байгаа эсэхийг шалгана. Байхгүй бол алдаа мэдэгдэж, None утгыг буцаана.&nbsp;</p>
+<p>Дараагийн алхам model үүсгэхэд амархан ялгах зорилгоор <strong>exam_score</strong>-оос <strong>Target_Exam_Score</strong> болгон өөрчилнө.</p>
+<p>Цэвэрлэгдсэн, боловсруулсан DataFrame (df) болон категорийн кодлогийн толь (encoders)-ийг буцаана.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            st.error(<span class="ss">f"Error loading data: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span>, <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Хэрэв try блок дотор ямар нэгэн алдаа гарвал (жишээ нь, CSV файл гэмтсэн байвал), алдааны мэдэгдлийг Streamlit-ээр харуулж, None, None-ийг буцаана.&nbsp;</p>
+<p>Хэрэв хэрэглэгч файл оруулаагүй бол (хамгийн эхний if uploaded_file is not None: шалгалтаар) мөн адил None, None-ийг буцаана.</p>
+</section>
+</section>
+</div>
+<section id="судалгааны-арга-зүй" class="level2">
+<h2 class="anchored" data-anchor-id="судалгааны-арга-зүй"><strong>3. Судалгааны арга зүй</strong></h2>
+<p>Өгөгдөл бүтэц нь олон төрлийн тоон болон категори шинжүүдээс бүрдэх тул бид дараах регрессийн загваруудыг ашиглан гүйцэтгэлийг нь харьцуулан шинжилсэн.</p>
+<p><strong>Регрессийн моделууд:</strong></p>
+<ol type="1">
+<li><p>Linear Regression: Хамгийн энгийн шугаман загвар</p></li>
+<li><p>Ridge Regression: Overfitting-ийг бууруулах L2 regularization</p></li>
+<li><p>Decision Tree: Шийдвэрийн мод суурьтай загвар</p></li>
+<li><p>Random Forest: Олон модны ансамбль</p></li>
+<li><p>SVR: Support Vector Machine суурьтай регресс</p></li>
+<li><p>K-Neighbors: Хамгийн ойрын хөршүүдийн дундаж&nbsp;</p></li>
+<li><p>Gradient Boosting: Градиент нэмэлт ансамбль :::</p></li>
+</ol>
+<section id="linear-regression-хамгийн-шугаман-загвар" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-хамгийн-шугаман-загвар"><strong>3.1&nbsp; Linear Regression ( Хамгийн шугаман загвар)</strong></h3>
+<p>Шугаман регресс нь өгөгдлийн олон шинжүүд болон зорилтот хувьсагчийн хоорондын шугаман хамаарлыг илэрхийлэх үндсэн арга юм.</p>
+<p><strong>Ерөнхий хэлбэр:&nbsp; ŷ = β₀ + β₁x₁ + β₂x₂ + ⋯ + βₚxₚ</strong></p>
+<p>Энд:</p>
+<ul>
+<li><p>ŷ – Таамаглагдсан шалгалтын оноо</p></li>
+<li><p>xᵢ – Оюутны зан үйл ба суралцах дадлын шинжүүд</p></li>
+<li><p>βᵢ – Тухайн шинжийн жин ба чухал байдал</p></li>
+<li><p>β₀ – Чөлөөт гишүүн</p></li>
+</ul>
+<p>Шугаман регресс нь хурдтай, тохируулахад хялбар, олон шинжтэй өгөгдөлд тогтвортой тул энэ төсөлд суурь baseline болгон ашигласан.</p>
+</section>
+<section id="ridge-regression" class="level3">
+<h3 class="anchored" data-anchor-id="ridge-regression"><strong>3.2 Ridge Regression</strong></h3>
+<p>Ridge Regression нь шугаман регрессийн өргөтгөл бөгөөд коэффициентуудын хэмжээг хэт их өсөхөөс хамгаалах L2-regularization ашигладаг.&nbsp;</p>
+<p>&nbsp;<strong>Ерөнхий хэлбэр:&nbsp; min&nbsp; ∑(yᵢ − ŷᵢ)² + λ ∑ βⱼ²</strong></p>
+<p>Энд:</p>
+<ul>
+<li><p>yᵢ : Бодит шалгалтын оноо</p></li>
+<li><p>ŷᵢ : Таамагласан шалгалтын оноо</p></li>
+<li><p>βⱼ : Моделийн коэффициентүүд</p></li>
+<li><p>λ : Regularization-ийн хүчийг удирдах гиперпараметр&nbsp;</p></li>
+<li><p>∑(yᵢ − ŷᵢ)² : MSE буюу загварын тайлбарлах чадвар</p></li>
+<li><p>λ ∑ βⱼ² : L2 шийтгэлийн гишүүн — коэффициентуудыг хэт өсөхөөс хамгаална</p></li>
+</ul>
+<p>Энэ төсөлд Ridge() ангийг ашигласан бөгөөд feature хооронд хэт их хамаарал байж болзошгүй нөхцөлд шугаман регресстэй харьцуулахад илүү тогтвортой коэффициент өгч, ерөнхийлөх чадварыг сайжруулах зорилгоор туршсан.</p>
+</section>
+<section id="decision-tree-regressor-шийдвэрийн-мод" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-regressor-шийдвэрийн-мод"><strong>3.3 Decision Tree Regressor (шийдвэрийн мод)</strong></h3>
+<p>Decision Tree Regressor нь өгөгдлийг дараалсан шийдвэрийн цэгүүдээр (splits) хувааж, шугаман бус хамаарлыг барьж чаддаг регрессийн загвар юм.</p>
+</section>
+<section id="алгоритмын-гол-зарчим" class="level3">
+<h3 class="anchored" data-anchor-id="алгоритмын-гол-зарчим">Алгоритмын гол зарчим</h3>
+<ul>
+<li><p>Оролтын шинжүүдээс MSE эсвэл variance-ийг хамгийн их бууруулж чадах шинжийг сонгон өгөгдлийг хуваана.</p></li>
+<li><p>Хуваасан хэсэг бүр дээр дахин хамгийн сайн шинжийг сонгон салбарлана.</p></li>
+<li><p>Эцсийн навч (leaf) node дээр тухайн хэсэгт хамаарах оноонуудын дундажийг таамаглал болгон авна.</p></li>
+</ul>
+<p>model_builder.py дотор DecisionTreeRegressor(random_state=42) загварыг ашиглаж, оюутнуудын дадал, оролцооны түвшин, өмнөх дүнгийн янз бүрийн хослолыг шийдвэрийн модоор салбарлуулж, шугаман бус хамаарлыг илүү сайн тайлбарлаж чадах эсэхийг шалгасан.</p>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest"><strong>3.4 Random Forest</strong></h3>
+<p>Random Forest Regressor нь олон шийдвэрийн модны ансамбль загвар бөгөөд overfitting–ийг бууруулж, тогтвортой таамаглал гаргах давуу талтай.</p>
+<ul>
+<li><p>Сургалтын өгөгдлөөс санамсаргүй олон bootstrap дэд цуглуулга үүсгэнэ.</p></li>
+<li><p>Цуглуулга бүр дээр нэг шийдвэрийн мод сургаж, node бүр дээр шинжүүдийн санамсаргүй дэд хэсгийг ашиглан салбарлалт хийдэг.</p></li>
+<li><p>Таамаглахдаа бүх модны гаргасан ŷ утгуудын дунджийг авна.</p></li>
+</ul>
+<p><strong>Давуу тал</strong></p>
+<ul>
+<li><p>Overfitting багатай</p></li>
+<li><p>Шугаман бус хамаарлыг сайн барьдаг</p></li>
+<li><p>Гүйцэтгэл тогтвортой, найдвартай</p></li>
+<li><p>Feature importance гаргаж өгдөг</p></li>
+</ul>
+<p>RandomForestRegressor(n_estimators=100, random_state=42) загварыг ашиглаж 100 шийдвэрийн модоор оюутны дадал, оролцоо, амьдралын хэв маяг зэрэг шинжүүдийг анализ хийж, шалгалтын оноог илүү найдвартай таамаглах боломжийг үнэлсэн. R² болон MAE үзүүлэлтээр бусад загвартай харьцуулж, ансамбль арга хэр сайн ажиллаж буйг шалгасан.</p>
+</section>
+<section id="support-vector-regressor-svr" class="level3">
+<h3 class="anchored" data-anchor-id="support-vector-regressor-svr"><strong>3.5&nbsp; Support Vector Regressor – SVR)</strong></h3>
+<p>SVR нь Support Vector Machine-ийн регрессийн хувилбар бөгөөд зорилго нь:</p>
+<ul>
+<li>Загвар оролтын өгөгдлийг өндөр хэмжээст орон зай руу kernel функцээр шилжүүлж, шугаман бус хамаарлыг илүү сайн барьдаг.</li>
+</ul>
+<p><strong>Ерөнхий хэлбэр: f(x) = wᵀ φ(x) + b</strong></p>
+<ul>
+<li><p>φ(x) — kernel функцээр үүссэн шинэ онцлогийн орон зай</p></li>
+<li><p>w, b — загварын параметрүүд</p></li>
+<li><p>ε — зөвшөөрөгдөх алдааны хэмжээ</p></li>
+</ul>
+<p>SVR нь шугаман бус, төвөгтэй хамаарлыг kernel ашиглан илүү уян хатан загварчилж чаддаг. Энэхүү төсөлд SVR() загварыг ашиглаж, оюутнуудын суралцах дадал, амьдралын хэв маяг, сэтгэл зүйн үзүүлэлтүүдийн<br>
+шугаман бус нөлөөллийг барьж, Target_Exam_Score–ийн таамаглалыг бусад загваруудтай R² болон MAE үзүүлэлтээр харьцуулан үнэлсэн.</p>
+</section>
+<section id="k-neighbors-regressor-хамгийн-ойрын-хөршүүдийн-дундаж" class="level3">
+<h3 class="anchored" data-anchor-id="k-neighbors-regressor-хамгийн-ойрын-хөршүүдийн-дундаж"><strong>3.6&nbsp; K-Neighbors Regressor ( Хамгийн ойрын хөршүүдийн дундаж)</strong></h3>
+<p>K-Neighbors Regressor нь “ижил төстэй оюутнууд ижил төстэй оноо авдаг” гэсэн зарчимд тулгуурласан, энгийн бөгөөд интуитив регрессийн арга юм. Шинэ оюутны таамаглалыг хамгийн ойр K хөршийн дундаж оноогоор тооцдог.</p>
+<p><strong>Алгоритмын үндсэн алхам</strong></p>
+<ol type="1">
+<li><p>Шинэ оюутны шинжийг (xₙₑw) өгөгдлийн орон зайд байрлуулна.</p></li>
+<li><p>Өгөгдлийн багцаас түүнтэй хамгийн ойр K хөршийг</p>
+<ul>
+<li><p>Евклидийн зай,</p></li>
+<li><p>эсвэл бусад зайны хэмжүүрээр сонгоно.</p></li>
+</ul></li>
+<li><p>Эдгээр K хөршийн бодит онооны дундажийг авч таамагласан утга (ŷ) болгон гаргана.</p></li>
+</ol>
+<p><strong>Ерөнхий хэлбэр:&nbsp; ŷ = (1 / K) ∑ yᵢ</strong></p>
+<p>Энэ төслийн хувьд:&nbsp;</p>
+<p>KNeighborsRegressor(n_neighbors=5) загварыг ашиглаж: 5 хамгийн ойр оюутны оноог дундажлан, шинэ оюутны Target_Exam_Score–ийг таамагласан. Энэ арга нь хялбардуу бөгөөд шугаман бус хамаарлыг тодорхой хэмжээнд тусгаж чаддаг тул бусад загвартай (Linear, Random Forest, SVR) хамт харьцуулалтын нэг хэсэг болгон ашигласан.</p>
+</section>
+<section id="gradient-boosting-градиент-нэмэлт-ансамбль" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-boosting-градиент-нэмэлт-ансамбль"><strong>3.7&nbsp; Gradient Boosting: Градиент нэмэлт ансамбль</strong></h3>
+<p>Gradient Boosting нь олон сул регрессийн модыг дараалан сургаж, өмнөх модны гаргасан алдааг нөхөн засах замаар нэг хүчтэй ансамбль загвар бий болгодог арга юм.</p>
+<p>Ерөнхий хэлбэр: Fₘ(x) = Fₘ₋₁(x) + ν · hₘ(x)</p>
+<p>Энд:</p>
+<ul>
+<li><p>Fₘ(x) — m-р шатны нийлмэл модель</p></li>
+<li><p>hₘ(x) — тухайн шатанд шинээр сурсан сул мод</p></li>
+<li><p>ν — learning rate (алдааг хэр хурдан засахыг удирдана)</p></li>
+</ul>
+<p>Давуу тал</p>
+<ul>
+<li><p>Шугаман бус хамаарлыг өндөр нарийвчлалтай барина</p></li>
+<li><p>Алдаа засах механизмтай тул нарийвчлал сайн</p></li>
+<li><p>Feature importance гаргаж өгөх боломжтой</p></li>
+</ul>
+<p>Энэ төслийн хувьд GradientBoostingRegressor(random_state=42) загварыг ажиллуулж оюутнуудын дадал, оролцоо, амьдралын хэв маяг, сэтгэлзүйн үзүүлэлтүүдийн нийлмэл нөлөөг, шат дараалсан модоор засаж таамаг гаргах боломжийг үнэлсэн. :::</p>
+</section>
+</section>
+<section id="туршилт-ба-үр-дүн" class="level2">
+<h2 class="anchored" data-anchor-id="туршилт-ба-үр-дүн"><strong>4. Туршилт ба үр дүн</strong></h2>
+<p>Бид цэвэрлэсэн 80000 мөр бүхий өгөгдлөөс загвар сургах хугацаа хэмнэх үүднээс санамсаргүй байдлаар 10000-ийг сонгон ашиглан linear regression, random forest, decision tree, gradient boosting, SVR загваруудыг сурган ажиллуулав. Эхлээд шалгалтын дүнг нарийвчлан таамаглах ба дараа нь практиктай нийцүүлэн 60-аас доош бол унасан, хэрэв 60-аас их буюу тэнцүү бол тэнцсэн хэмээн ангилан тохирох хэмжүүрүүдийг харьцуулав.</p>
+<section id="регрессийн-хэмжүүрүүдийн-харьцуулалт" class="level3">
+<h3 class="anchored" data-anchor-id="регрессийн-хэмжүүрүүдийн-харьцуулалт"><strong>4.1 Регрессийн хэмжүүрүүдийн харьцуулалт</strong></h3>
+<p><br>
+</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Загвар</td>
+<td>R^2 score</td>
+<td>MAE(mean absolute error)</td>
+</tr>
+<tr class="even">
+<td>Linear regression</td>
+<td>0.167</td>
+<td>8.79</td>
+</tr>
+<tr class="odd">
+<td>Random forest</td>
+<td>0.152</td>
+<td>8.94</td>
+</tr>
+<tr class="even">
+<td>Decision tree</td>
+<td>-0.755</td>
+<td>11.87</td>
+</tr>
+<tr class="odd">
+<td>Gradient boosting</td>
+<td>0.181</td>
+<td>8.69</td>
+</tr>
+<tr class="even">
+<td>SVR</td>
+<td>0.013</td>
+<td>8.93</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<p>Үүнээс дүгнэхэд gradient boosting хамгийн гүйцэтгэл сайтай байсан бол decision tree хамгийн үр дүн багатай загвар байв. Мөн linear regression random forest-оос илүү гүйцэтгэлтэй байгаа нь хүчин зүйлс болон шалгалтын оноо дийлэнхдээ шугаман хамааралтайг харуулж байж болох юм.</p>
+<p><br>
+</p>
+<p>Мөн энд R^2 оноо бага байгаа нь манай өгөгдөл хэдий шалгалтын оноотой тодорхой хэмжээнд холбоотой боловч гадаад хүчин зүйлс ч гэсэн нөлөөлж байна гэдгийг харуулж байна.&nbsp;</p>
+<p><br>
+</p>
+<p>MAE нь шалгалтын нийт оноо 100-тай харьцуулахад шалгалтандаа хангалттай авах оюутан ба хангалтгүй авах оюутныг ялган салгахад хангалттай бага байна.</p>
+</section>
+<section id="регрессийн-хэмжүүрүүдийн-харьцуулалт-1" class="level3">
+<h3 class="anchored" data-anchor-id="регрессийн-хэмжүүрүүдийн-харьцуулалт-1"><strong>4.2 Регрессийн хэмжүүрүүдийн харьцуулалт</strong></h3>
+<p><br>
+</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>загвар</td>
+<td>accuracy</td>
+<td>precision</td>
+<td>recall</td>
+<td>F1 score</td>
+</tr>
+<tr class="even">
+<td>Linear regression</td>
+<td>98.50%</td>
+<td>0.98</td>
+<td>1.00</td>
+<td>0.99</td>
+</tr>
+<tr class="odd">
+<td>Random forest</td>
+<td>98.50%</td>
+<td>0.98</td>
+<td>1.00</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td>Decision tree</td>
+<td>96.85%</td>
+<td>0.99</td>
+<td>0.98</td>
+<td>0.98</td>
+</tr>
+<tr class="odd">
+<td>Gradient boosting</td>
+<td>98.50%</td>
+<td>0.98</td>
+<td>1.00</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td>SVR</td>
+<td>98.50%</td>
+<td>0.98</td>
+<td>1.00</td>
+<td>0.99</td>
+</tr>
+</tbody>
+</table>
+<p>Энд precision, recall, f1 score загваруудын хувьд ялгаа байхгүй байгаа ба decision tree-ээс бусад нь нарийвчлал сайтай байгааг харж болно.</p>
+</section>
+<section id="feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance"><strong>4.3 Feature importance</strong></h3>
+<p>Үзүүлэлт тус бүрийн хэр чухалыг загвар болгон дээр дараах кодыг ашиглан гаргав.</p>
+<p>Загваруудын шинж чанарын чухал байдлыг (Feature Importance) тооцож үзэхэд загвар тус бүр өөр өөр хүчин зүйлийг онцолж байв. Жишээлбэл, Linear Regression загварын хувьд ‘Tutoring’ буюу багшаас зөвлөгөө авах боломж хамгийн чухал байсан бол бусад загваруудад ‘Study Hours’ буюу суралцах цаг голлох нөлөөтэй байна. Доорх графикаас дэлгэрэнгүйг харна уу</p>
+<p>Эндээс харахад linear regression -ий хувьд биечлэн зөвлөгөө авах боломжтой эсэх нь хамгийн чухал байгаа бол бусад загваруудын хувьд өдөрт суралцахад зарцуулах хугацаа нь хамгийн чухал байна.</p>
+</section>
+<section id="төөрөгдлийн-матриц-ба-бодит-таамагласан-утгын-график" class="level3">
+<h3 class="anchored" data-anchor-id="төөрөгдлийн-матриц-ба-бодит-таамагласан-утгын-график"><strong>4.4 Төөрөгдлийн матриц ба бодит-таамагласан утгын график</strong></h3>
+<p>Загвар болгонд хэр зөв, нарийвчлалтай ажилласныг харахын тулд төөрөгдлийн матриц ба бодит-таамагласан утгын графикийг дүрслэв. :::</p>
+</section>
+</section>
+<section id="дүгнэлт" class="level2">
+<h2 class="anchored" data-anchor-id="дүгнэлт">5. <strong>Дүгнэлт</strong></h2>
+<section id="судалгааны-үр-дүн" class="level3">
+<h3 class="anchored" data-anchor-id="судалгааны-үр-дүн"><strong>Судалгааны үр дүн</strong></h3>
+<p>Манай судалгаагаар оюутны өдөр тутмын дадал зуршил, суралцах хэв маяг, амьдралын хэвшил нь сурлагын гүйцэтгэлд тодорхой нөлөө үзүүлдэг болохыг тодорхойллоо. Оюутны GPA-г урьдчилан таамаглахад хэд хэдэн машин сургалтын регрессийн загваруудыг туршиж, үр дүнг харьцуулсан.</p>
+</section>
+<section id="загварын-гүйцэтгэл" class="level3">
+<h3 class="anchored" data-anchor-id="загварын-гүйцэтгэл"><strong>Загварын гүйцэтгэл</strong></h3>
+<p>Gradient Boosting regression загвар нь GPA-г урьдчилан таамаглахад хамгийн сайн гүйцэтгэл үзүүлсэн бол Linear Regression болон Random Forest загварууд мөн сайн үр дүн үзүүлсэн. Decision Tree загвар сул гүйцэтгэлтэй, R² бага гарсан.</p>
+</section>
+<section id="гол-нөлөө-үзүүлдэг-хүчин-зүйлс" class="level3">
+<h3 class="anchored" data-anchor-id="гол-нөлөө-үзүүлдэг-хүчин-зүйлс"><strong>Гол нөлөө үзүүлдэг хүчин зүйлс</strong></h3>
+<p>Оюутны сурлагын амжилтанд хамгийн их нөлөө үзүүлдэг хүчин зүйлс нь өдөрт суралцах цаг, биечлэн зөвлөгөө авах боломж, мотиваци ба анхаарал төвлөрөл болох нь тодорхой болсон. Загварын R² бага гарсан ч MAE нь бага, ангилалтын нарийвчлал өндөр тул оюутны амжилт эсвэл уналтыг ялгахад хангалттай үр дүн үзүүлсэн. Судалгааны үр дүнд загварууд нь оноог яг таг таамаглахаас илүүтэй, оюутан шалгалтад тэнцэх эсэхийг (Binary Classification) урьдчилан таамаглахад илүү өндөр нарийвчлалтай ажиллаж байгаа нь харагдлаа.</p>
+</section>
+<section id="анхаарах-зүйлс" class="level3">
+<h3 class="anchored" data-anchor-id="анхаарах-зүйлс"><strong>Анхаарах зүйлс</strong></h3>
+<p>Зарим гадаад хүчин зүйлс, жишээлбэл шалгалтын нөхцөл, багшийн үнэлгээ зэрэг нь GPA-д нөлөөлж болохыг анхаарах хэрэгтэй.</p>
+</section>
+<section id="зөвлөмж" class="level3">
+<h3 class="anchored" data-anchor-id="зөвлөмж"><strong>Зөвлөмж</strong></h3>
+<p>Оюутны сурлагын амжилтыг сайжруулахын тулд өдөр тутмын суралцах хугацааг нэмэгдүүлэх, биечлэн зөвлөгөө өгөх боломжийг хангах, мотиваци, стрессийг дэмжих сургалтын арга хэмжээ авах нь чухал гэж дүгнэж болно. :::</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
