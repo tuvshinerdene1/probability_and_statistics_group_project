@@ -14,8 +14,8 @@ format:
     toc: true
   pdf:
     documentclass: scrartcl
-    toc: true               # Enables Table of Contents in PDF
-    toc-title: "Агуулга"    # Sets the title of the TOC
+    toc: true               
+    toc-title: "Агуулга"    
     include-in-header:
       text: |
         \usepackage{fontspec}
@@ -24,13 +24,11 @@ format:
         \setmonofont{FreeMono}
         \usepackage{polyglossia}
         \setmainlanguage{mongolian}
-        
-        % 1. REDUCE FONT SIZE
+
         \addtokomafont{title}{\Large} 
         \addtokomafont{author}{\normalsize}
         \addtokomafont{date}{\small}
         
-        % 2. INSERT HEADER
         \usepackage{scrlayer-scrpage}
         \clearpairofpagestyles
         \ihead{\footnotesize Оюутны сурлагын гүйцэтгэл} 
@@ -38,19 +36,80 @@ format:
         \cfoot{\pagemark} 
         \pagestyle{scrheadings}
         
-        % 3. FIX LIST ROW HEIGHT
         \usepackage{enumitem}
         \setlist{nosep} 
         \setlist[itemize]{leftmargin=*}
         \setlist[enumerate]{leftmargin=*}
 
-        % 4. FIX CODE OVERFLOW (The robust LaTeX way)
         \usepackage{fvextra}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+        % fontsize=\scriptsize makes code very small to prevent wrapping
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\scriptsize,commandchars=\\\{\}}
 
 jupyter: python3
+bibliography: references.bib
 ---
+```{python}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.svm import SVR
+
+filename = "./enhanced_student_habits_performance_dataset.csv" 
+
+try:
+    df = pd.read_csv(filename)
+    
+    # Cleaning Logic 
+    columns_to_drop = ['student_id', 'previous_gpa']
+    df = df.drop(columns=[col for col in columns_to_drop if col in df.columns], axis=1)
+    df = df.dropna()
+
+    # Encoding
+    categorical_cols = df.select_dtypes(include=['object', 'bool']).columns
+    for col in categorical_cols:
+        le = LabelEncoder()
+        df[col] = le.fit_transform(df[col].astype(str))
+
+    if 'exam_score' in df.columns:
+        df = df.rename(columns={'exam_score': 'Target_Exam_Score'})
+
+
+    X = df.drop('Target_Exam_Score', axis=1)
+    y = df['Target_Exam_Score']
+    feature_names = X.columns
+
+    if len(df) > 10000:
+        X, _, y, _ = train_test_split(X, y, train_size=10000, random_state=42)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    models_to_train = {
+        'Linear Regression': LinearRegression(),
+        'Decision Tree': DecisionTreeRegressor(random_state=42),
+        'Random Forest': RandomForestRegressor(n_estimators=100, random_state=42),
+        'Gradient Boosting': GradientBoostingRegressor(random_state=42),
+        'SVR': SVR() 
+    }
+
+    trained_models = {}
+    for name, model in models_to_train.items():
+        model.fit(X_train, y_train)
+        trained_models[name] = model
+
+except Exception as e:
+    print(f"Data load error: {e}")
+```
 ::: {#introduction}
 Энэхүү ажлаар оюутнуудын өдөр тутмын дадал зуршил, суралцах хэв маяг, амьдралын хэвшлийн талаарх өгөгдөлд үндэслэн оюутны сурлагын гүйцэтгэл (GPA)-д хэрхэн нөлөөлдгийг тооцох юм. Kaggle сайтын “Student habits vs academic performance” өгөгдлийн санг ашиглан оюутны мэдээллийг оруулахад гүйцэтгэлийг урьдчилан таамаглах боломжийг бүрдүүлнэ.
 :::
@@ -251,7 +310,7 @@ if 'exam_score' not in df.columns:
 
 ### **3.1  Linear Regression ( Хамгийн шугаман загвар)**
 
-Шугаман регресс нь өгөгдлийн олон шинжүүд болон зорилтот хувьсагчийн хоорондын шугаман хамаарлыг илэрхийлэх үндсэн арга юм.
+Шугаман регресс нь өгөгдлийн олон шинжүүд болон зорилтот хувьсагчийн хоорондын шугаман хамаарлыг илэрхийлэх үндсэн арга юм. [@hastie2009elements]
 
 **Ерөнхий хэлбэр:  $$ \hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p $$**
 
@@ -269,7 +328,7 @@ if 'exam_score' not in df.columns:
 
 ### **3.2 Ridge Regression**
 
-Ridge Regression нь шугаман регрессийн өргөтгөл бөгөөд коэффициентуудын хэмжээг хэт их өсөхөөс хамгаалах L2-regularization ашигладаг. 
+Ridge Regression нь шугаман регрессийн өргөтгөл бөгөөд коэффициентуудын хэмжээг хэт их өсөхөөс хамгаалах L2-regularization ашигладаг. [@hoerl1970ridge]
 
  **Ерөнхий хэлбэр:  $$ \min \sum (y_i - \hat{y}_i)^2 + \lambda \sum \beta_j^2 $$**
 
@@ -291,7 +350,7 @@ Ridge Regression нь шугаман регрессийн өргөтгөл бө�
 
 ### **3.3 Decision Tree Regressor (шийдвэрийн мод)**
 
-Decision Tree Regressor нь өгөгдлийг дараалсан шийдвэрийн цэгүүдээр (splits) хувааж, шугаман бус хамаарлыг барьж чаддаг регрессийн загвар юм.
+Decision Tree Regressor нь өгөгдлийг дараалсан шийдвэрийн цэгүүдээр (splits) хувааж, шугаман бус хамаарлыг барьж чаддаг регрессийн загвар юм. [@breiman1984classification]
 
 **Алгоритмын гол зарчим**
 
@@ -305,7 +364,7 @@ model_builder.py дотор DecisionTreeRegressor(random_state=42) загвар�
 
 ### **3.4 Random Forest**
 
-Random Forest Regressor нь олон шийдвэрийн модны ансамбль загвар бөгөөд overfitting–ийг бууруулж, тогтвортой таамаглал гаргах давуу талтай.
+Random Forest Regressor нь олон шийдвэрийн модны ансамбль загвар бөгөөд overfitting–ийг бууруулж, тогтвортой таамаглал гаргах давуу талтай. [@breiman2001random]
 
 -   Сургалтын өгөгдлөөс санамсаргүй олон bootstrap дэд цуглуулга үүсгэнэ.
 
@@ -329,7 +388,7 @@ RandomForestRegressor(n_estimators=100, random_state=42) загварыг аши
 
 SVR нь Support Vector Machine-ийн регрессийн хувилбар бөгөөд зорилго нь:
 
--   Загвар оролтын өгөгдлийг өндөр хэмжээст орон зай руу kernel функцээр шилжүүлж, шугаман бус хамаарлыг илүү сайн барьдаг.
+-   Загвар оролтын өгөгдлийг өндөр хэмжээст орон зай руу kernel функцээр шилжүүлж, шугаман бус хамаарлыг илүү сайн барьдаг. [@drucker1997support]
 
 **Ерөнхий хэлбэр: $$ f(x) = w^T \phi(x) + b $$**
 
@@ -344,7 +403,7 @@ SVR нь шугаман бус, төвөгтэй хамаарлыг kernel аш�
 
 ### **3.6  K-Neighbors Regressor ( Хамгийн ойрын хөршүүдийн дундаж)**
 
-K-Neighbors Regressor нь “ижил төстэй оюутнууд ижил төстэй оноо авдаг” гэсэн зарчимд тулгуурласан, энгийн бөгөөд интуитив регрессийн арга юм. Шинэ оюутны таамаглалыг хамгийн ойр K хөршийн дундаж оноогоор тооцдог.
+K-Neighbors Regressor нь “ижил төстэй оюутнууд ижил төстэй оноо авдаг” гэсэн зарчимд тулгуурласан, энгийн бөгөөд интуитив регрессийн арга юм. Шинэ оюутны таамаглалыг хамгийн ойр K хөршийн дундаж оноогоор тооцдог. [@cover1967nearest]
 
 **Алгоритмын үндсэн алхам**
 
@@ -366,15 +425,15 @@ KNeighborsRegressor(n_neighbors=5) загварыг ашиглаж: 5 хамги
 
 ### **3.7  Gradient Boosting: Градиент нэмэлт ансамбль**
 
-Gradient Boosting нь олон сул регрессийн модыг дараалан сургаж, өмнөх модны гаргасан алдааг нөхөн засах замаар нэг хүчтэй ансамбль загвар бий болгодог арга юм.
+Gradient Boosting нь олон сул регрессийн модыг дараалан сургаж, өмнөх модны гаргасан алдааг нөхөн засах замаар нэг хүчтэй ансамбль загвар бий болгодог арга юм. [@friedman2001greedy]
 
 Ерөнхий хэлбэр: $$ F_m(x) = F_{m-1}(x) + \nu \cdot h_m(x) $$
 
 Энд:
 
--   Fₘ(x) — m-р шатны нийлмэл модель
+-   $$F_m(x)$$ — m-р шатны нийлмэл модель
 
--   hₘ(x) — тухайн шатанд шинээр сурсан сул мод
+-   $$h_m(x)$$ — тухайн шатанд шинээр сурсан сул мод
 
 -   ν — learning rate (алдааг хэр хурдан засахыг удирдана)
 
@@ -435,15 +494,170 @@ MAE нь шалгалтын нийт оноо 100-тай харьцуулаха�
 ### **4.3 Feature importance**
 
 Үзүүлэлт тус бүрийн хэр чухалыг загвар болгон дээр дараах кодыг ашиглан гаргав.
+``` python
+with tab2:
+    if hasattr(model, 'feature_importances_'):
+        imp = model.feature_importances_
+        feats = X_test.columns
+        df_imp = pd.DataFrame({'Feature': feats, 'Importance': imp}).sort_values('Importance', ascending=False).head(10)
+        fig, ax = plt.subplots()
+        sns.barplot(x='Importance', y='Feature', data=df_imp, ax=ax)
+        st.pyplot(fig)
+    elif hasattr(model, 'coef_'):
+        imp = np.abs(model.coef_)
+        df_imp = pd.DataFrame({'Feature': X_test.columns, 'Importance': imp}).sort_values('Importance', ascending=False).head(10)
+        fig, ax = plt.subplots()
+        sns.barplot(x='Importance', y='Feature', data=df_imp, ax=ax)
+        st.pyplot(fig)
+    else:
+        st.info("Feature importance not available.")
+```
 
 Загваруудын шинж чанарын чухал байдлыг (Feature Importance) тооцож үзэхэд загвар тус бүр өөр өөр хүчин зүйлийг онцолж байв. Жишээлбэл, Linear Regression загварын хувьд 'Tutoring' буюу багшаас зөвлөгөө авах боломж хамгийн чухал байсан бол бусад загваруудад 'Study Hours' буюу суралцах цаг голлох нөлөөтэй байна. Доорх графикаас дэлгэрэнгүйг харна уу
+```{python}
+#| label: feature-importance-plots
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Feature Importance by Model"
+#| fig-height: 10
+#| fig-width: 12
 
+
+plot_data = []
+for name, model in trained_models.items():
+    imp = None
+    
+    if hasattr(model, 'feature_importances_'):
+        imp = model.feature_importances_
+    elif hasattr(model, 'coef_'):
+        imp = np.abs(model.coef_)
+        if imp.ndim > 1: imp = imp[0]
+    
+    if imp is not None:
+        plot_data.append((name, imp))
+
+n_plots = len(plot_data)
+cols = 2
+rows = (n_plots + 1) // cols 
+
+if n_plots > 0:
+    fig, axes = plt.subplots(rows, cols, figsize=(15, 6 * rows))
+    axes = axes.flatten()
+
+    for i, (name, imp) in enumerate(plot_data):
+        df_imp = pd.DataFrame({
+            'Feature': feature_names, 
+            'Importance': imp
+        }).sort_values('Importance', ascending=False).head(10)
+        
+        sns.barplot(
+            x='Importance', 
+            y='Feature', 
+            hue='Feature', 
+            data=df_imp, 
+            ax=axes[i], 
+            palette='viridis', 
+            legend=False
+        )
+        
+        axes[i].set_title(f'{name}')
+        axes[i].set_xlabel('Importance Score')
+        axes[i].set_ylabel('')
+
+    for j in range(i + 1, len(axes)):
+        axes[j].axis('off')
+
+    plt.tight_layout()
+    plt.show()
+else:
+    print("Feature importance харуулах боломжтой загвар олдсонгүй.")
+
+```
 Эндээс харахад linear regression -ий хувьд биечлэн зөвлөгөө авах боломжтой эсэх нь хамгийн чухал байгаа бол бусад загваруудын хувьд өдөрт суралцахад зарцуулах хугацаа нь хамгийн чухал байна.
 
 ### **4.4 Төөрөгдлийн матриц ба бодит-таамагласан утгын график**
 
 Загвар болгонд хэр зөв, нарийвчлалтай ажилласныг харахын тулд төөрөгдлийн матриц ба бодит-таамагласан утгын графикийг дүрслэв.
 
+```{python}
+#| label: actual-vs-predicted-plot
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Actual vs Predicted Scores"
+#| fig-height: 12
+#| fig-width: 12
+
+# Layout setup
+n_models = len(trained_models)
+cols = 2
+rows = (n_models + 1) // cols 
+
+fig, axes = plt.subplots(rows, cols, figsize=(15, 6 * rows))
+axes = axes.flatten()
+
+for i, (name, model) in enumerate(trained_models.items()):
+    y_pred = model.predict(X_test)
+    
+    axes[i].scatter(y_test, y_pred, alpha=0.5, color='blue', edgecolor='k', s=20)
+    
+    min_val, max_val = 0, 100
+    axes[i].plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label='Perfect Prediction')
+    
+    axes[i].set_title(f"{name}: Actual vs Predicted")
+    axes[i].set_xlabel("Actual Score")
+    axes[i].set_ylabel("Predicted Score")
+    axes[i].legend()
+    axes[i].grid(True, alpha=0.3)
+
+for j in range(i + 1, len(axes)):
+    axes[j].axis('off')
+
+plt.tight_layout()
+plt.show()
+#| label: confusion-matrix-plot
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Confusion Matrices (Threshold = 60)"
+#| fig-height: 12
+#| fig-width: 12
+
+from sklearn.metrics import confusion_matrix
+
+threshold = 60.0
+
+y_test_bin = (y_test >= threshold).astype(int)
+
+
+fig, axes = plt.subplots(rows, cols, figsize=(15, 6 * rows))
+axes = axes.flatten()
+
+for i, (name, model) in enumerate(trained_models.items()):
+
+    y_pred = model.predict(X_test)
+    y_pred_bin = (y_pred >= threshold).astype(int)
+    
+
+    cm = confusion_matrix(y_test_bin, y_pred_bin)
+    
+
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=axes[i],
+                xticklabels=['Fail (<60)', 'Pass (>=60)'],
+                yticklabels=['Fail (<60)', 'Pass (>=60)'],
+                cbar=False)
+    
+    axes[i].set_title(f"{name} Confusion Matrix")
+    axes[i].set_xlabel("Predicted")
+    axes[i].set_ylabel("Actual")
+
+for j in range(i + 1, len(axes)):
+    axes[j].axis('off')
+
+plt.tight_layout()
+plt.show()
+```
 ## 5. **Дүгнэлт**
 
 ### **Судалгааны үр дүн**
@@ -465,3 +679,21 @@ Gradient Boosting regression загвар нь GPA-г урьдчилан таа�
 ### **Зөвлөмж**
 
 Оюутны сурлагын амжилтыг сайжруулахын тулд өдөр тутмын суралцах хугацааг нэмэгдүүлэх, биечлэн зөвлөгөө өгөх боломжийг хангах, мотиваци, стрессийг дэмжих сургалтын арга хэмжээ авах нь чухал гэж дүгнэж болно.
+
+## **Гишүүдийн оролцоо**
+
+Багийн гишүүд болгонд кодын тодорхой үүрэг бүхий хэсгүүдийг оноон хөгжүүлэлт хийгдсэн. 
+
+Үүний дараа гишүүд өөрсдийн бичсэн кодын тохирох хэсгийг тайлан болон үзүүлэнд оруулсан.
+
+М.Амирлангуй - Үндсэн аппликейшнийг зохион байгуулах, бүх модулуудыг нэгтгэх (app.py)
+
+Э.Доржням - Хэрэглэгчийн оруулсан өгөгдөл дээр үндэслэн шалгалтын оноог урьдчилан таамаглах(predictor.py)
+
+А.Анударь - Регрессийн машин сургалтын моделуудыг сургах, үнэлэх(model_builder.py)
+
+Т.Лхагвасүрэн - CSV өгөгдлийг уншиж, цэвэрлэж, бэлтгэх(data_loader.py)
+
+Э.Түвшин-Эрдэнэ - Моделийн гүйцэтгэлийг графикаар болон тоон үзүүлэлтээр харуулах(visualizer.py)
+
+## **Ашигласан материал**
