@@ -78,7 +78,7 @@ def main():
 
             # --- ГОРИМ 2: НЭГ МОДЕЛЬ АШИГЛАХ ---
             else:
-                model_options = ['Linear Regression', 'Random Forest', 'Decision Tree', 'Gradient Boosting', 'SVR']
+                model_options = ['Linear Regression','Ridge Regression', 'Random Forest', 'Decision Tree', 'Gradient Boosting', 'SVR']
                 selected_model = st.selectbox("Select a model:", model_options)
 
                 with st.spinner(f"Training {selected_model}..."):
